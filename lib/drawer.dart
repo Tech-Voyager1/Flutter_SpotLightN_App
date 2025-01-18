@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:spotlight/appColor.dart';
 import 'package:spotlight/heroSection.dart';
 
+int colorPalatte = 1;
+Color? appBar;
+Color? bodyIcons;
+Color? drawerIcons;
+Color? listPlaces;
+
 class Drawer_ extends StatefulWidget {
   const Drawer_({Key? key}) : super(key: key);
 
@@ -12,6 +18,49 @@ class Drawer_ extends StatefulWidget {
 class _Drawer_State extends State<Drawer_> {
   final _scaffkey = GlobalKey<ScaffoldState>();
 
+  void colorChoose(int colorPalatte) {
+    print("Choosen Color Palatte is : $colorPalatte");
+    switch (colorPalatte) {
+      case 1:
+        appBar = AppColors.darkpurple;
+        bodyIcons = AppColors.liteblue;
+        drawerIcons = AppColors.mildpurple;
+        listPlaces = AppColors.litepurple;
+        break;
+      case 2:
+        appBar = AppColors.darkgreen;
+        bodyIcons = AppColors.litepink;
+        drawerIcons = AppColors.mildgreen;
+        listPlaces = AppColors.litegreen;
+        break;
+      case 3:
+        appBar = AppColors.darkgrey;
+        bodyIcons = AppColors.litewhite;
+        drawerIcons = AppColors.mildgrey;
+        listPlaces = AppColors.litegrey;
+        break;
+      case 4:
+        appBar = AppColors.darkbrown;
+        bodyIcons = AppColors.litebrown;
+        drawerIcons = AppColors.mildbrown;
+        listPlaces = AppColors.liteOrange;
+        break;
+
+      default:
+        appBar = AppColors.darkpurple;
+        bodyIcons = AppColors.liteblue;
+        drawerIcons = AppColors.mildpurple;
+        listPlaces = AppColors.litepurple;
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    colorChoose(colorPalatte);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,9 +68,9 @@ class _Drawer_State extends State<Drawer_> {
         home: Scaffold(
             key: _scaffkey,
             appBar: AppBar(
-              backgroundColor: AppColors.darkpurple, //Color(0xfff6649ef),
+              backgroundColor: appBar, //Color(0xfff6649ef),
               elevation: 5,
-              shadowColor: Color(0xff5b26d7),
+              shadowColor: drawerIcons,
               title: Text(
                 "SPOTLIGHT NEARBY",
                 style: TextStyle(
@@ -51,7 +100,7 @@ class _Drawer_State extends State<Drawer_> {
                   DrawerHeader(
                     //  curve: Curves.bounceIn,
                     decoration: BoxDecoration(
-                      color: Colors.purple.shade200, // Light purple color
+                      color: drawerIcons, // Light purple color
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,8 +111,7 @@ class _Drawer_State extends State<Drawer_> {
                           height: 60,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(
-                                color: AppColors.darkpurple, width: 2.3),
+                            border: Border.all(color: appBar!, width: 2.3),
                             image: DecorationImage(
                               image: AssetImage(
                                   'asset/icons/app_icon.png'), // Your logo path
@@ -101,25 +149,35 @@ class _Drawer_State extends State<Drawer_> {
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Icons.info, color: Colors.purple.shade300),
+                    leading: Icon(Icons.info, color: drawerIcons),
                     title: Text('About'),
                     onTap: () {
                       // Navigate to About
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.map, color: Colors.purple.shade300),
+                    leading: Icon(Icons.map, color: drawerIcons),
                     title: Text('Radius'),
                     onTap: () {
                       // Navigate to Radius
                     },
                   ),
                   ListTile(
-                    leading:
-                        Icon(Icons.contact_page, color: Colors.purple.shade300),
+                    leading: Icon(Icons.contact_page, color: drawerIcons),
                     title: Text('Contact'),
                     onTap: () {
                       // Navigate to Contact
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.color_lens, color: drawerIcons),
+                    title: Text('Colour'),
+                    onTap: () {
+                      setState(() {
+                        colorPalatte = colorPalatte == 4 ? 1 : colorPalatte + 1;
+                        print(colorPalatte);
+                        colorChoose(colorPalatte);
+                      });
                     },
                   ),
                 ],

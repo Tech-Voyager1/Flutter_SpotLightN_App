@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:spotlight/appColor.dart';
+import 'package:spotlight/drawer.dart';
 import 'package:spotlight/home.dart';
 import 'polyline.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -79,6 +80,7 @@ class _HeroSectionState extends State<HeroSection> {
 
   @override
   Widget build(BuildContext context) {
+    //print(colorPalatte);
     return Container(
       padding: const EdgeInsets.only(top: 0.0, left: 8, right: 8),
       child: GridView.builder(
@@ -139,7 +141,7 @@ class _HeroSectionState extends State<HeroSection> {
                 margin: EdgeInsets.only(top: 20, left: 10, right: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: AppColors.liteblue, //Color(0xffdcd0bb),
+                    color: bodyIcons, //Color(0xffdcd0bb),
                     boxShadow: [
                       BoxShadow(color: Color(0xff000000), blurRadius: 3)
                     ]),
@@ -369,7 +371,7 @@ class _MapScreenState extends State<MapScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 170, 80, 185),
+      backgroundColor: listPlaces,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
